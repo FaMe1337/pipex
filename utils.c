@@ -6,7 +6,7 @@
 /*   By: famendes <famendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:57:10 by famendes          #+#    #+#             */
-/*   Updated: 2024/11/12 19:31:35 by famendes         ###   ########.fr       */
+/*   Updated: 2024/11/12 22:10:24 by famendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,26 @@ void	execute(char *av, char **envp)
 	char	*path;
 
 	cmd = ft_split(av, ' ');
-	if (access(cmd[0], F_OK) == 0)
-		exec_cmd(cmd, envp);
-	else
+	if (!envp || !envp[0])
 	{
-		path = find_path(cmd[0], envp);
-		if (!path)
-		{
-			free_paths(cmd);
-			error("Path not found");
-		}
-		else if (execve(path, cmd, envp) == -1)
-		{
-			free_paths(cmd);
-			free(path);
-			error("Execve failed");
-		}
+		if (access(cmd[0], F_OK) == 0)
+			exec_cmd(cmd, envp);
+		free_paths(cmd);
+		error("Path cant be reached");
+	}
+	if (access(cmd[0], F_OK) == 0)
+			exec_cmd(cmd, envp);
+	path = find_path(cmd[0], envp);
+	if (!path)
+	{
+		free_paths(cmd);
+		error("Path not found");
+	}
+	else if (execve(path, cmd, envp) == -1)
+	{
+		free_paths(cmd);
+		free(path);
+		error("Execve failed");
 	}
 }
 

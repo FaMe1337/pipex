@@ -6,7 +6,7 @@
 /*   By: famendes <famendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:15:56 by famendes          #+#    #+#             */
-/*   Updated: 2024/11/12 16:04:24 by famendes         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:50:28 by famendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	main(int ac, char **av, char **envp)
 	{
 		if (av[2][0] == 0 || av[3][0] == 0)
 			error("cmd is empty");
-		if (!envp[0])
-			error("Envp path doesnt exist");
 		if (pipe(fd) < 0)
 			error("pipe creation failed");
 		pid = fork();
