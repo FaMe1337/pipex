@@ -6,15 +6,15 @@
 #    By: famendes <famendes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 15:09:04 by famendes          #+#    #+#              #
-#    Updated: 2024/11/11 15:17:34 by famendes         ###   ########.fr        #
+#    Updated: 2024/11/12 19:30:28 by famendes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-CC = gcc
+CC = cc
 
-CFLAGS = -Werror -Wall -Wextra -s
+CFLAGS = -Werror -Wall -Wextra
 
 RM = rm -rf
 

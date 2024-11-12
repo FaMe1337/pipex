@@ -6,18 +6,28 @@
 /*   By: famendes <famendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 13:57:10 by famendes          #+#    #+#             */
-/*   Updated: 2024/11/11 15:11:18 by famendes         ###   ########.fr       */
+/*   Updated: 2024/11/12 19:31:35 by famendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static void free_paths(char **paths)
+static void	free_paths(char **paths)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (paths[i])
 		free(paths[i++]);
 	free(paths);
+}
+
+void exec_cmd(char **cmd, char **envp)
+{
+	if (execve(cmd[0], cmd, envp) == -1)
+	{
+		free_paths(cmd);
+		error("Execve failed");
+	}
 }
 
 void	error(char *str)
@@ -61,17 +71,22 @@ void	execute(char *av, char **envp)
 	char	*path;
 
 	cmd = ft_split(av, ' ');
-	path = find_path(cmd[0], envp);
-	if (!path)
+	if (access(cmd[0], F_OK) == 0)
+		exec_cmd(cmd, envp);
+	else
 	{
-		free_paths(cmd);
-		error("Path not found");
+		path = find_path(cmd[0], envp);
+		if (!path)
+		{
+			free_paths(cmd);
+			error("Path not found");
+		}
+		else if (execve(path, cmd, envp) == -1)
+		{
+			free_paths(cmd);
+			free(path);
+			error("Execve failed");
+		}
 	}
-	if (execve(path, cmd, envp) == -1)
-	{
-		free_paths(cmd);
-		free(path);
-		error("Execve failed");
-	}
-
 }
+

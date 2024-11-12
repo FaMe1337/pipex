@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: famendes <famendes@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/12 16:05:21 by famendes          #+#    #+#             */
+/*   Updated: 2024/11/12 19:31:08 by famendes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -14,5 +26,6 @@ void	parent_process(char **av, char **envp, int *fd);
 void	execute(char *av, char **envp);
 char	*find_path(char *cmd, char **envp);
 void	error(char *str);
+void 	exec_cmd(char **cmd, char **envp);
 
 #endif

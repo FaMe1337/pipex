@@ -6,7 +6,7 @@
 /*   By: famendes <famendes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 15:15:56 by famendes          #+#    #+#             */
-/*   Updated: 2024/11/11 17:22:31 by famendes         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:04:24 by famendes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int ac, char **av, char **envp)
 		parent_process(av, envp, fd);
 	}
 	else
-		ft_putstr_fd("Wrong arguments, please struc like the following example: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 2);
+		ft_putstr_fd("Wrong arguments, please struc like the " \
+		"following example:./pipex <file1> <cmd1> <cmd2> <file2>\n", 2);
 	return (0);
 }
